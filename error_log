@@ -1,0 +1,1 @@
+[23-Sep-2013 19:32:26] PHP Warning:  mysqli_connect() [<a href='function.mysqli-connect'>function.mysqli-connect</a>]: (28000/1045): Access denied for user 'nikkianan'@'localhost' (using password: YES) in /home2/neoan/public_html/homework-board/includes/mydb-functions.php on line 11

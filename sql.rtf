@@ -1,0 +1,33 @@
+<?php include('includes/mydb-functions.php');
+
+connect_to_db();
+if(isset($_POST['classname'],$_POST['hwname'], $_POST['desc'], $_POST['due'])) // in here we are checking if $_POST['title'] and $_POST['content'] are defined. This would happen if you are coming to this page through insert-article page, otherwise server will NOT receive this parameters. isset() function returns true or false
+{
+	connect_to_db();
+	
+	$hwname = htmlspecialchars($_POST['hwname']);
+	$classname = htmlspecialchars($_POST['classname']);
+	$desc = htmlspecialchars($_POST['desc']);
+	$due = htmlspecialchars($_POST['due']);
+	
+
+	$sql = "INSERT INTO detail (due,classname,hwname,detail) VALUES ('".$due."','".$classname."','".$hwname."','".$desc."')";
+	
+	if(!query($sql)) // if this query succeed
+	{
+		header("location: index.php?insert=fail1");
+	} else {
+		$sql2 = "UPDATE homework SET hwnum = hwnum+1 WHERE due = '".$due."'";
+		if(!query($sql2)) // if this query succeed
+		{
+			header("location: index.php?insert=fail2");
+		} else {
+			header("location: index.php?insert=ok");
+		}
+	}
+}
+else
+{
+	echo "Those names do not exist. Make sure you are connected to the right database";
+}
+?>
